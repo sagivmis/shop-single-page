@@ -180,6 +180,33 @@ function LoadCart() {
     });
     CalculteCartTotal();
 }
+function LoadCatalog() {
+    products.map((prod) => {
+        let tag = document.createElement("p");
+        let catalog = document.getElementById("catalog");
+
+        let name = prod.name;
+        let description = prod.description;
+        let img = prod.image;
+        let price = prod.price;
+
+        let nameText = ProductName(name);
+        let descText = ProductDescription(description);
+        let imageProduct = ProductImage(img);
+        let priceProduct = ProductPrice(price);
+
+        let addToCartBtn = ConfigAddToCartButton();
+        let addQuantityBtn = ConfigAddCatalogButton();
+        let deductQuantityBtn = ConfigDeductCatalogButton();
+        let quantityText = ProductQuantity(prod);
+
+
+        AppendCatalogChildren(tag, nameText, descText, imageProduct, priceProduct, addQuantityBtn, deductQuantityBtn, quantityText, addToCartBtn);
+
+        tag.className = `item ${prod.id}`;
+        catalog.appendChild(tag);
+    });
+}
 
 function EmptyCartNotification() {
     let tag = document.createElement("p");
@@ -262,35 +289,6 @@ function CalculteCartTotal(){
     cart.map((prod)=> total+=prod.totalPrice);
     totalElement.innerHTML = total.toLocaleString() + " $";
 }
-function LoadCatalog() {
-    products.map((prod) => {
-        let tag = document.createElement("p");
-        let catalog = document.getElementById("catalog");
-
-        let name = prod.name;
-        let description = prod.description;
-        let img = prod.image;
-        let price = prod.price;
-
-        let nameText = ProductName(name);
-        let descText = ProductDescription(description);
-        let imageProduct = ProductImage(img);
-        let priceProduct = ProductPrice(price);
-
-        let addToCartBtn = ConfigAddToCartButton();
-        let addQuantityBtn = ConfigAddCatalogButton();
-        let deductQuantityBtn = ConfigDeductCatalogButton();
-        let quantityText = ProductQuantity(prod);
-        
-
-
-
-        AppendCatalogChildren(tag, nameText, descText, imageProduct, priceProduct, addQuantityBtn, deductQuantityBtn, quantityText, addToCartBtn);
-
-        tag.className = `item ${prod.id}`;
-        catalog.appendChild(tag);
-    });
-}
 
 function ProductName(name) {
     let nameText = document.createElement("p");
@@ -313,7 +311,7 @@ function ProductImage(img) {
 
 function ProductPrice(price) {
     let priceProduct = document.createElement("p");
-    priceProduct.innerHTML = price + "$";
+    priceProduct.innerHTML = price.toLocaleString() + " $";
     return priceProduct;
 }
 

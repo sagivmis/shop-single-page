@@ -117,3 +117,7 @@ img{
     display: inline;
     margin-left: 10px;
 }
+
+.quantity-text{
+    width: 40px;
+}
